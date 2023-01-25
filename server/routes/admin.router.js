@@ -36,7 +36,7 @@ router.post('/school-signup', (req, res)=>{
     const school_regd_id = req.body.school_regd_id;
     const password = req.body.password;
 
-    connection.query(`insert into school values (?,?,?,?,?);`
+    connection.query(`insert into school_info values (?,?,?,?,?);`
     ,[id, schoolname, school_address,school_regd_id, password],
     (err, result)=>{
         if(err){
