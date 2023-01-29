@@ -105,6 +105,26 @@ router.post('/:student_id/add-attendance', (req, res) => {
     }
 });
 
+// Edit Student
+router.put('/:student_id/attendance', (req, res)=>{
+    const regdNumber = req.params.student_id;
+    const {total_lectures, lectures_attended, school_code} = req.body;
+
+    if(req.session.loggedin){
+        connection.query(`update attendance set total_lectures=? and lectures_attended = ? where regdNumber=? and school_code = ?;`,
+        [total_lectures, lectures_attended, regdNumber, school_code],
+        (err, result)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+
+})
+
 // See Notice Board
 router.get('/:school_regd_id/notice_board', (req, res)=>{
     const school_regd_id = req.params.id;
