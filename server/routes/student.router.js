@@ -153,6 +153,21 @@ router.get('/:id/final', (req, res)=>{
     }
 });
 
+// Get My Attendance
+router.get('/:regdNumber/get-my-attendance', (req, res)=>{
+    const regdNumber = req.params.regdNumber
+    if(req.session.loggedin){
+        connection.query(`select lectures_attended, total_lectures from attendance where regdNumber = ?;`
+        ,[regdNumber], (err, result)=>{
+            if(err){
+                res.send(err)
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+})
 
 
 

@@ -3,6 +3,7 @@ const session = require('express-session');
 
 // Importing MYSQL
 const connection = require('../db/conn');
+const { route } = require('./teacher.router');
 
 router.use(session({
     secret: process.env.SECRET_KEY,
@@ -198,6 +199,69 @@ router.post('/:school_regd_id/add-subjects', (req, res)=>{
         res.send("Admin Logged Out");
     }
 });
+
+
+// Notice Board
+// Post Notice
+router.post('/:school_regd_id/notice-board', (req, res)=>{
+    const {id, heading, message, Author} = req.body;
+    const {school_regd_id} = req.params;
+    if(req.session.loggedin){
+        connection.query(`insert into notice_board values (?,?,?,?,(select school_regd_id from school_info where school_regd_id = ?));`,
+        [id, heading, message, Author, school_regd_id]
+        ,(err, result)=>{
+            if(err){
+                res.send(err);
+            }else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        res.send("School Logged Out");
+    }
+})
+
+// Get Notice
+router.get('/:school_regd_id/notice_board', (req, res)=>{
+    const school_regd_id = req.params.id;
+    const id = req.body.id;
+    if(req.session.loggedin){
+        connection.query(`select * from notice_board where school_regd_id = ?;`,[school_regd_id],
+        (err, result)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        res.send("School Logged Out");
+    }
+});
+
+router.delete('/:school_regd_id/notice_board', (req, res)=>{
+    const school_regd_id = req.params.id;
+    const id = req.body.id;
+    if(req.session.loggedin){
+        connection.query(`delete * from notice_board where id=? and school_regd_id = ?`,
+        [id, school_regd_id], (err, result)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        res.send("School Logged Out");
+    }
+})
+
+
 
 
 

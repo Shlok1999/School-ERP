@@ -105,6 +105,27 @@ router.post('/:student_id/add-attendance', (req, res) => {
     }
 });
 
+// See Notice Board
+router.get('/:school_regd_id/notice_board', (req, res)=>{
+    const school_regd_id = req.params.id;
+    const id = req.body.id;
+    if(req.session.loggedin){
+        connection.query(`select * from notice_board where school_regd_id = ?;`,[school_regd_id],
+        (err, result)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                res.send(result);
+            }
+        })
+    }
+    else{
+        res.send("School Logged Out");
+    }
+});
+
+
 
 
 
