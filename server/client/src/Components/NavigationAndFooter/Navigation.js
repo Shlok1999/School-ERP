@@ -5,7 +5,8 @@ function Navigation() {
     <div className='navigation-section'>
         <div className="navigation">
             <div className="logo">
-                <h2>LOGO</h2>
+                {/* <img src={require('./NEW-PRACTIS.jpg')} alt="" /> */}
+                LOGO
             </div>
             <div className="links">
                 <div className="link">Home</div>

@@ -1,0 +1,93 @@
+.home-page-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2rem;
+    color: grey;
+    animation: slidein 3s;
+
+}
+.header{
+    color: grey;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.header-heading{
+    text-align: left;
+    max-width: 500px;
+    color: rgb(42, 47, 47);
+}
+
+.motto-section{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.motto-section-heading h1{
+    color: rgb(42, 47, 47);
+    text-decoration: underline;
+}
+
+.motto-values{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+.motto-value{
+    background-color: rgb(42, 47, 47);
+    width: 250px;
+    margin: 20px;
+    padding: 3rem;
+}
+
+.title{
+    color: white;
+    text-align: left;
+}
+
+.para{
+    margin-top: 1rem;
+    text-align: left;
+    color: rgb(218, 218, 218);
+}
+
+.motto-section-heading{
+    color: white
+}
+
+
+.company{
+    margin-top: 3rem;
+    color: grey;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+.company-section-heading{
+    text-align: left;
+    max-width: 500px;
+}
+.company-section-heading h1{
+    color: rgb(42, 47, 47);
+}
+.company-section-heading h3{
+    color: rgb(42, 47, 47) ;
+}
+
+@keyframes slidein{
+    from{
+        margin-right: 20%;
+    }
+    to{
+        margin-right: 2rem;
+    }
+}

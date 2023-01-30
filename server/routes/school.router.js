@@ -25,11 +25,18 @@ router.post('/login', (req, res) => {
                     res.send(err);
                 }
                 if (result) {
-                    req.session.loggedin = true;
-                    req.session.id = result[0].id;
-                    req.session.userData = result[0];
-                    res.status(200).send(result[0].school_regd_id);
-                    console.log("Admin Logged in")
+                    try{
+                        req.session.loggedin = true;
+                        req.session.id = result[0].id;
+                        req.session.userData = result[0];
+                        res.status(200).send({message: 'Login Successful',result: result[0]});
+                        // res.redirect('/school-dashboard');
+                        console.log("School Logged in")
+                    }
+                    catch(err){
+                        res.send({message: "Invalid Credentials"});
+                    }
+                    
                 }
                 else {
                     res.send("Invalid Username or Password")

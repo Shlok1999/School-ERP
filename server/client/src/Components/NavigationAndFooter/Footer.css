@@ -1,6 +1,10 @@
 .footer-section{
     width: 100%;
-    background-color: rgb(199, 255, 255);
+    background-color: rgb(42, 47, 47);
     height: 20vh;
-    margin-top: 80vh;
+    margin-top: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
 }
