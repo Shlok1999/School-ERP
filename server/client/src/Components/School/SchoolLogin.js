@@ -25,6 +25,8 @@ function SchoolLogin( {setLoginSchool}) {
         .then((res)=>{
             alert(res.data.message)
             setLoginSchool(res.data.result)
+            localStorage.setItem('school', JSON.stringify(res.data.result))
+            localStorage.setItem('token', JSON.stringify(res.data.auth))
             navigate('/school-dashboard')
             
         })

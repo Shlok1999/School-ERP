@@ -1,0 +1,9 @@
+.school-add-student-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.add-stud-form>input{
+    height: 30px;
+    margin-top: 10px;
+}

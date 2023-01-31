@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react'
-
+import second from './School.css'
+const manage = require('./mission.png')
+const values = require('./school.png')
+const schoollogo = require('./th.jpg')
 function SchoolDashboard({name}) {
-  // const [schoolData, setSchoolData] = useState({})
-  // const school_name = (school_regd_id)=>{
-  //   fetch(`http://localhost:2470/api/school/`+ school_regd_id)
-  //   .then((res)=>res.json())
-  //   .then((data)=>setSchoolData(data))
-  //   .catch((err)=>console.log(err.message))
-  // }
 
-  // useEffect(()=>{
-  //   school_name(schoolData);
-  // }, []);
+
   return (
     <div className='school-dashboard'>
-        <h1>You are Logged in {name}  </h1>
+        <div className="school-header">
+          <div className="school-name-title">
+            <img src={schoollogo} alt="" />
+          </div>
+          <div className="school-name"><h3>{name}</h3> </div>
+        </div>
+        <div className="school-dashboard-sections">
+          <div className="dashboard"><a href="/manage-students">Manage Students</a> </div>
+          <div className="dashboard">Manage Teachers</div>
+          <div className="dashboard">Manage Subjects</div>
+          <div className="dashboard">Notice Board</div>
+          <div className="dashboard">Check Library Status</div>
+          <div className="dashboard">Manage Inventory</div>
+
+        </div>
     </div>
   )
 }

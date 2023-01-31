@@ -9,10 +9,10 @@ function Navigation() {
                 LOGO
             </div>
             <div className="links">
-                <div className="link">Home</div>
-                <div className="link">School Login</div>
-                <div className="link">Teacher Login</div>
-                <div className="link">Student Login</div>
+                <div className="link"><a href="/">Home</a></div>
+                <div className="link"><a href="/school-login">School Login</a></div>
+                <div className="link"><a href="#">Teacher Login</a> </div>
+                <div className="link"><a href="#">Student Login</a> </div>
             </div>
         </div>
     </div>

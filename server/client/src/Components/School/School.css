@@ -32,3 +32,36 @@
     width: 300px;
 }
 
+/* Dashboard */
+
+.school-dashboard{
+    display: flex;
+    flex-direction: column;
+}
+.school-header{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.school-dashboard-sections{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.dashboard{
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.school-name-title img{
+    width: 100px;
+    border: 7px solid rgb(81, 81, 88);
+    border-radius: 50%;
+}
