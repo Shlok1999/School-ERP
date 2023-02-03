@@ -15,12 +15,12 @@ function SchoolDashboard({name}) {
           <div className="school-name"><h3>{name}</h3> </div>
         </div>
         <div className="school-dashboard-sections">
-          <div className="dashboard"><a href="/manage-students">Manage Students</a> </div>
-          <div className="dashboard">Manage Teachers</div>
-          <div className="dashboard">Manage Subjects</div>
-          <div className="dashboard">Notice Board</div>
-          <div className="dashboard">Check Library Status</div>
-          <div className="dashboard">Manage Inventory</div>
+          <div className="dashboard"><a href="/manage-students">Manage Students</a></div>
+          <div className="dashboard"><a href="/manage-teachers">Manage Teachers</a></div>
+          <div className="dashboard"><a href="/manage-subjects">Manage Subjects</a></div>
+          <div className="dashboard"><a href="/manage-notice">Notice Board</a></div>
+          <div className="dashboard"><a href="/manage-library">Check Library Status</a></div>
+          <div className="dashboard"><a href="/manage-inventory">Manage Inventory</a></div>
 
         </div>
     </div>

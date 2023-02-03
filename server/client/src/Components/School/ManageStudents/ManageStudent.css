@@ -1,3 +1,37 @@
+/* Manage Student Page */
+.manage-student-link{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.manage-student-link .links{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.manage-student-link .links> .student-link{
+    
+    border: 5px solid rgb(63, 62, 143);
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+.student-link{
+    margin: 2rem;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+.student-link a{
+    text-decoration: none;
+    color: black;
+}
+
 .school-add-student-section{
     display: flex;
     align-items: center;
@@ -6,4 +40,68 @@
 .add-stud-form>input{
     height: 30px;
     margin-top: 10px;
+}
+
+
+/* Get Students */
+
+.get-student-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+.form-get-student{
+    border: 10px solid rgb(48, 48, 51);
+    padding: 1rem;
+}
+.get-student-form input{
+    width: 300px;
+    height: 25px;
+    margin: 5px;
+
+}
+
+/* Get Student List */
+
+.student-list{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.student-link-cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.student-card{
+    border: 2px solid rgb(124, 124, 248);
+    margin: 1rem;
+    width: 600px;
+}
+
+.student-card  div{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin: 10px;
+
+}
+
+.student-mid .img{
+    width: 40px;
+    height: 40px;
+}
+.edit-student-info{
+    display: flex;
+    padding: 10px;
+    color: white;
+    background-color: rgb(94, 94, 255);
+    margin-bottom: 10px;
 }

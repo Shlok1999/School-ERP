@@ -29,11 +29,12 @@ router.post('/login', (req, res) => {
                 }
                 if (result) {
                     try{
-                        jwt.sign({result}, jwt_key,{expiresIn: "2h"},(err, token)=>{
+                        jwt.sign({result}, jwt_key,{expiresIn: "2d"},(err, token)=>{
                             if(err){
                                 res.send("User Not Found");
                             }
-                            res.status(200).send({message: 'Login Successful',result: result[0], auth: token});
+                            res.send({message: 'Login Successful',result: result[0], auth: token});
+                            console.log(result)
 
                         })
                         
@@ -59,7 +60,7 @@ router.post('/login', (req, res) => {
 
 router.get('/:school_regd_id', (req, res) => {
     const school_regd_id = req.params.school_regd_id;
-    if (req.session.loggedin) {
+    if (school_regd_id) {
         connection.query(`select schoolname from school_info where school_regd_id = ? ;`
             , [school_regd_id], (err, result) => {
                 if (err) {
@@ -86,20 +87,19 @@ router.post('/:school_regd_id/add-student', (req, res) => {
     const section = req.body.section;
     const fee_paid = req.body.fee_paid;
     const total_fees = req.body.total_fees;
-    const attendance = req.body.attendance;
-    const { unit_test_1_percent, half_yearly_percent, unit_test_2_percent, final_exam_percent } = req.body;
     const fee_status = req.body.fee_status;
-    const school_regdNumber = req.body.school_regdNumber;
+    const school_regdNumber = req.params.school_regd_id;
 
-    if (req.session.loggedin) {
-        connection.query(`insert into student values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select school_regd_id from school_info where school_regd_id = ? ));`,
-            [id, regdNumber, password, firstname, lastname, standard, section, fee_paid, total_fees, attendance, fee_status, unit_test_1_percent, half_yearly_percent, unit_test_2_percent, final_exam_percent, school_regdNumber],
+    if (regdNumber && password) {
+        connection.query(`insert into student values (?,?,?,?,?,?,?,?,?,?,(select school_regd_id from school_info where school_regd_id = ? ));`,
+            [id, regdNumber, password, firstname, lastname, standard, section, fee_paid, total_fees, fee_status, school_regdNumber],
             (err, result) => {
                 if (err) {
                     res.send(err);
                 }
                 else {
-                    res.send({ message: 'Student Added', result: result });
+                    res.send({ message: 'Student Added', result: result[0] });
+                    console.log(result);
                 }
             })
     }
@@ -111,7 +111,7 @@ router.post('/:school_regd_id/add-student', (req, res) => {
 // Get All Students
 router.get('/:school_regd_id/get-all-students', (req, res) => {
     const school_regd_id = req.params.school_regd_id;
-    if (req.session.loggedin) {
+    if (req.body) {
         connection.query(`select * from student where school_regdNumber = ? order by regdNumber;`, [school_regd_id]
             , (err, result) => {
                 if (err) {
@@ -130,7 +130,7 @@ router.get('/:school_regd_id/get-all-students', (req, res) => {
 // Get Students who did not pay full fee
 router.get('/:school_regd_id/get-all-students-unpaid', (req, res) => {
     const school_regd_id = req.params.school_regd_id;
-    if (req.session.loggedin) {
+    if (school_regd_id) {
         connection.query(`select * from student where school_regdNumber = ? and fee_status = 'Not Paid' order by regdNumber`
             , [school_regd_id], (err, result) => {
                 if (err) {
@@ -149,14 +149,15 @@ router.get('/:school_regd_id/get-all-students-unpaid', (req, res) => {
 router.post('/:school_regd_id/get-student-by-class', (req, res) => {
     const { standard, section } = req.body;
     const school_regd_id = req.params.school_regd_id;
-    if (req.session.loggedin) {
+    if (req.body && req.params) {
         connection.query(`select * from student where standard = ? and section = ? and school_regdNumber =?;`,
             [standard, section, school_regd_id], (err, result) => {
                 if (err) {
                     res.send(err);
                 }
                 if (result) {
-                    res.send(result);
+                    res.send({message: 'Got Students from class '+ standard+ ' '+ section, result: result});
+                    console.log(result)
                 }
                 else {
                     res.send("Class Not Found");
@@ -172,16 +173,16 @@ router.post('/:school_regd_id/get-student-by-class', (req, res) => {
 // Teacher Section
 
 router.post('/:school_regd_id/add-teacher', (req, res) => {
-    const { id, regdNumber, firstname, lastname, subject, feedback_score, salary, school_regdNumber } = req.body;
+    const { id, regdNumber,password, firstname, lastname, subject, feedback_score, salary, school_regdNumber } = req.body;
 
-    if (req.session.loggedin) {
-        connection.query(`insert into teacher values (?,?,?,?,(select subject_name from subjects where subject_name = ?),?,?,(select school_regd_id from school_info where school_regd_id = ?))
-        ;`, [id, regdNumber, firstname, lastname, subject, feedback_score, salary, school_regdNumber], (err, result) => {
+    if (req.body) {
+        connection.query(`insert into teacher values (?,?,?,?,?,(select subject_name from subjects where subject_name = ?),?,?,(select school_regd_id from school_info where school_regd_id = ?))
+        ;`, [id, regdNumber,password, firstname, lastname, subject, feedback_score, salary, school_regdNumber], (err, result) => {
             if (err) {
                 res.send(err);
             }
             else {
-                res.send(result);
+                res.send({message: 'Teacher posted', result: result[0]});
             }
         })
     }
